@@ -20,3 +20,6 @@ override.tf.json
 
 # .env files
 .env
+
+# local OS files
+.DS_Store
