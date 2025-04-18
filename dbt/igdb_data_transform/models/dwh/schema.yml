@@ -1,0 +1,111 @@
+version: 2
+
+models:
+  - name: games_dashboard
+    description: "A dashboard model that combines game details, types, statuses, and popularity scores from IGDB and Steam."
+    columns:
+      - name: id
+        description: "Unique identifier for the game."
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "The name of the game."
+        tests:
+          - not_null
+      - name: first_release_date
+        description: "The date the game was first released."
+      - name: created_at
+        description: "The date the game was added to the IGDB database."
+      - name: dlt_load_timestamp
+        description: "Timestamp of the data load into the pipeline."
+      - name: cover_url
+        description: "Game's cover image."
+      - name: parent_game_id
+        description: "If a DLC, expansion or part of a bundle, this is the main game or bundle."
+      - name: igdb_url
+        description: "URL to the game's IGDB page."
+      - name: game_type_id
+        description: "ID of the game's type."
+      - name: game_type_name
+        description: "Name of the game's type."
+      - name: game_status_id
+        description: "The status of the games release."
+      - name: game_status_name
+        description: "Name of the game's status."
+      - name: genre_names
+        description: "Names of the game's genres." 
+      - name: paltform_names
+        description: "Names of the platforms the game is available on." 
+      - name: hypes
+        description: "Number of follows a game gets before release."
+      - name: rating
+        description: "Average IGDB user rating."
+      - name: rating_count
+        description: "Total number of IGDB user ratings."
+      - name: total_rating
+        description: "Average rating based on both IGDB user and external critic scores."
+      - name: total_rating_count
+        description: "Total number of user and external critic scores."
+      - name: aggregated_rating
+        description: "Rating based on external critic scores."
+      - name: aggregated_rating_count
+        description: "Number of external critic scores."
+      - name: steam_most_wishlisted_upcoming_score
+        description: "Score for the most wishlisted upcoming games on Steam."
+      - name: steam_global_top_sellers_score
+        description: "Score for global top sellers on Steam."
+      - name: steam_total_reviews_score
+        description: "Score for total reviews on Steam."
+      - name: steam_negative_reviews_score
+        description: "Score for negative reviews on Steam."
+      - name: steam_positive_reviews_score
+        description: "Score for positive reviews on Steam."
+      - name: steam_24h_peak_players_score
+        description: "Score for peak CCU over the past 24 hours on Steam."
+      - name: igdb_visits_score
+        description: "Score for game page visits on IGDB.com."
+      - name: igdb_playing_score
+        description: "Score for additions to IGDB.com users' 'Playing' lists."
+      - name: igdb_want_to_play_score
+        description: "Score for additions to IGDB.com users' 'Want to Play' lists"
+      - name: igdb_played_score
+        description: "Score for additions to IGDB.com users' 'Played' lists."
+
+  - name: steam_popularity_primitives
+    description: "Model for Steam popularity primitives, including scores for reviews, top sellers, and peak players."
+    columns:
+      - name: game_id
+        description: "Unique identifier for the game."
+        tests:
+          - not_null
+          - unique
+      - name: steam_most_wishlisted_upcoming_score
+        description: "Score for the most wishlisted upcoming games on Steam."
+      - name: steam_global_top_sellers_score
+        description: "Score for global top sellers on Steam."
+      - name: steam_total_reviews_score
+        description: "Score for total reviews on Steam."
+      - name: steam_negative_reviews_score
+        description: "Score for negative reviews on Steam."
+      - name: steam_positive_reviews_score
+        description: "Score for positive reviews on Steam."
+      - name: steam_24h_peak_players_score
+        description: "Score for peak CCU over the past 24 hours on Steam."
+
+  - name: igdb_popularity_primitives
+    description: "Model for IGDB popularity primitives, including scores for visits, playing, and want-to-play metrics."
+    columns:
+      - name: game_id
+        description: "Unique identifier for the game."
+        tests:
+          - not_null
+          - unique
+      - name: igdb_visits_score
+        description: "Score for game page visits on IGDB.com."
+      - name: igdb_playing_score
+        description: "Score for additions to IGDB.com users' 'Playing' lists."
+      - name: igdb_want_to_play_score
+        description: "Score for additions to IGDB.com users' 'Want to Play' lists"
+      - name: igdb_played_score
+        description: "Score for additions to IGDB.com users' 'Played' lists."

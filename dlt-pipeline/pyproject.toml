@@ -1,0 +1,9 @@
+[project]
+name = "dlt-pipeline"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "dlt[filesystem,gs,parquet]>=1.9.0",
+    "dotenv>=0.9.9",
+    "python-dotenv>=1.1.0",
+]

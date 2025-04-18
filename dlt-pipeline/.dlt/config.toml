@@ -1,0 +1,7 @@
+[destination.filesystem]
+bucket_url = "gs://igdb-game-data"  # change to your bucket name
+project_id = "course-data-engineering"  # change to your project id
+
+[runtime]
+log_level="WARNING"  # the system log level of dlt
+dlthub_telemetry = false

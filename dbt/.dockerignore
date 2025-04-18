@@ -1,0 +1,4 @@
+igdb_data_transform/logs/
+igdb_data_transform/target/
+igdb_data_transform/.user.yml
+.venv/

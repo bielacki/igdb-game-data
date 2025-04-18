@@ -1,0 +1,13 @@
+igdb_data_transform:
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: course-data-engineering
+      dataset: igdb_dwh
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: europe-west2
+      priority: interactive
+      threads: 1
+  target: dev

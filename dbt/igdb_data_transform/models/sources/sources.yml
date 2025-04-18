@@ -1,0 +1,13 @@
+sources:
+  - name: igdb_source
+    database: course-data-engineering
+    schema: igdb_source
+    tables:
+      - name: game_statuses
+      - name: game_types
+      - name: games
+      - name: genres
+      - name: external_game_sources
+      - name: platforms
+      - name: popularity_primitives
+      - name: popularity_types
