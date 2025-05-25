@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project demonstrates an end-to-end data pipeline built using modern data engineering tools and cloud services. The pipeline extracts video games data from [IGDB API](https://api-docs.igdb.com/), processes it through several stages, and presents insights via a Looker Studio dashboard.
+This project demonstrates an end-to-end data pipeline built using modern data engineering tools and cloud services. The pipeline extracts video games data from [IGDB API](https://api-docs.igdb.com/), processes it through several stages, and presents insights via a [Looker Studio dashboard](https://lookerstudio.google.com/reporting/53787c21-0269-4ec8-9312-431debe922ab) and a [Streamlit app](https://igdb-game-data.streamlit.app/).
 
 *Note: This project was built as part of the [Data Engineering Zoomcamp course](https://github.com/DataTalksClub/data-engineering-zoomcamp/) to demonstrate various data engineering tools and technologies. While some components could be simplified, the current architecture showcases the practical application of course concepts.*
 
@@ -25,7 +25,7 @@ The final result is a [dashboard in Looker Studio](https://lookerstudio.google.c
 1. **Extraction**: A Cloud Run function using `dlt` extracts data from IGDB API endpoints and stores it as Parquet files in Google Cloud Storage (GCS).
 2. **Processing**: A Dataproc cluster runs PySpark jobs to process the Parquet files in GCS, slightly modifies the data, and loads it into a BigQuery dataset.
 3. **Transformation**: `dbt` transforms the source data in BigQuery into analytics-ready models within a separate BigQuery dataset.
-4. **Visualization**: Looker Studio connects to the transformed data in BigQuery to create interactive dashboards.
+4. **Visualization**: Looker Studio connects to the transformed data in BigQuery to create interactive dashboards. Streamlit app connects to a BigQuery data source, caches the data, and displays a grid of cards featuring popular games and hot upcoming releases. 
 5. **Orchestration**: Airflow on a Compute Engine VM orchestrates the entire pipeline, scheduling and managing the execution of each step.
 
 ## Technologies Used
@@ -50,6 +50,7 @@ The final result is a [dashboard in Looker Studio](https://lookerstudio.google.c
 - **Other Tools**
   - [uv](https://github.com/astral-sh/uv) (Python package and project installer)
   - Looker Studio
+  - Streamlit
 
 ## Prerequisites
 
@@ -72,7 +73,7 @@ cd igdb-game-data
 
 ### 2. Configure Service Account and secrets
 
-In your Google cloud project create 3 service accounts:
+In your Google cloud project create 4 service accounts:
 - **Service account for Terraform** with the following roles:
     - BigQuery Admin
     - Cloud Functions Admin
@@ -91,12 +92,16 @@ In your Google cloud project create 3 service accounts:
 - **Service account for dbt** with the following roles:
     - BigQuery Data Editor
     - BigQuery User
+- **Service account for Streamlit** with the following roles:
+    - BigQuery Data Viewer
+    - BigQuery Job User
 
 
 For each service account, create a JSON key and download the key into the /secrets/ directory located in the root folder of the project with following names:
 - airflow-sa.json
 - dbt-sa.json
 - terraform-sa.json
+- streamlit-sa.json
 
 **Important**: Ensure that the /secrets/ folder is listed in the .gitignore file to avoid committing sensitive keys.
 
@@ -208,7 +213,10 @@ After connecting the dataset you can click Create report and start visualizing y
 
 Access the dashboard [here](https://lookerstudio.google.com/reporting/53787c21-0269-4ec8-9312-431debe922ab)
 
+### 7. Create a Streamlit app
 
+A grid of cards featuring popular games and hot upcoming releases is published on [Streamlit Community Cloud](https://streamlit.io/cloud). An app also enables filtering, sorting and pagination. It also caches data for 24h and uses [Polars](https://pola.rs/) for dataframes processing to optimize performance and reduce unnecessary queries to BigQuery.
 
+![Streamlit App](./images/streamlit_app.png)
 
-
+The app is available [here](https://igdb-game-data.streamlit.app/).
