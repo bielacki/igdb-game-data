@@ -215,7 +215,7 @@ Access the dashboard [here](https://lookerstudio.google.com/reporting/53787c21-0
 
 ### 7. Create a Streamlit app
 
-A grid of cards featuring popular games and hot upcoming releases is published on [Streamlit Community Cloud](https://streamlit.io/cloud). An app also enables filtering, sorting and pagination. It also caches data for 24h and uses [Polars](https://pola.rs/) for dataframes processing to optimize performance and reduce unnecessary queries to BigQuery.
+A grid of cards featuring popular games and hot upcoming releases is published on [Streamlit Community Cloud](https://streamlit.io/cloud) ([repository](https://github.com/bielacki/igdb-game-data-streamlit)). An app also enables filtering, sorting and pagination. It also caches data for 24h and uses [Polars](https://pola.rs/) for dataframes processing to optimize performance and reduce unnecessary queries to BigQuery.
 
 ![Streamlit App](./images/streamlit_app.png)
 
